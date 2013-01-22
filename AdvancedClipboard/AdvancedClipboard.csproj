@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B180E296-76E5-4BEE-8B9B-9961537FB08B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AdvancedClipboard</RootNamespace>
+    <AssemblyName>AdvancedClipboard</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\DLLs\RhinoLicensing\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\..\..\..\..\..\..\Francois\Dev\DLLs\Windows API\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Licensing">
+      <HintPath>..\..\..\DLLs\RhinoLicensing\Rhino.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="ScintillaNET">
+      <HintPath>..\..\..\..\..\..\..\Francois\Dev\DLLs\ScintillaNET\ScintillaNET.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WindowsInput">
+      <HintPath>..\..\..\..\..\..\..\Francois\Dev\DLLs\WindowsInput\WindowsInput.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="..\..\SharedClasses\RegistrationWindow.xaml">
+      <Link>RegistrationWindow.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\..\SharedClasses\UnhandledExceptionsWindow.xaml">
+      <Link>UnhandledExceptionsWindow.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="..\..\SharedClasses\InputBoxWPF.xaml">
+      <Link>InputBoxWPF.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="..\..\SharedClasses\CompareObjects.cs">
+      <Link>CompareObjects.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\Generics.cs">
+      <Link>Generics.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\SettingsSimple.cs">
+      <Link>SettingsSimple.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\WebInterop.cs">
+      <Link>WebInterop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\Windows7JumpListsInterop.cs">
+      <Link>Windows7JumpListsInterop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\AppTypeIndependant.cs">
+      <Link>AppTypeIndependant.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\AutoUpdating.cs">
+      <Link>AutoUpdating.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\DeveloperCommunication.cs">
+      <Link>DeveloperCommunication.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\EventHandlers.cs">
+      <Link>EventHandlers.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\fastJSON.cs">
+      <Link>fastJSON.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\FeedbackMessageTypes.cs">
+      <Link>FeedbackMessageTypes.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\LicensingInterop_Client.cs">
+      <Link>LicensingInterop_Client.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\LicensingInterop_Shared.cs">
+      <Link>LicensingInterop_Shared.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\Logging.cs">
+      <Link>Logging.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\MachineFingerPrint.cs">
+      <Link>MachineFingerPrint.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\PhpInterop.cs">
+      <Link>PhpInterop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\ProcessesInterop.cs">
+      <Link>ProcessesInterop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\ReflectionInterop.cs">
+      <Link>ReflectionInterop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\RegistrationWindow.xaml.cs">
+      <Link>RegistrationWindow.xaml.cs</Link>
+      <DependentUpon>RegistrationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\RegistryInterop.cs">
+      <Link>RegistryInterop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\UnhandledExceptionsWindow.xaml.cs">
+      <Link>UnhandledExceptionsWindow.xaml.cs</Link>
+      <DependentUpon>UnhandledExceptionsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\CalledFromService.cs">
+      <Link>CalledFromService.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\EncodeAndDecodeInterop.cs">
+      <Link>EncodeAndDecodeInterop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\EncryptionInterop.cs">
+      <Link>EncryptionInterop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\MiniDownloadBarForm.cs">
+      <Link>MiniDownloadBarForm.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\MiniDownloadBarForm.designer.cs">
+      <Link>MiniDownloadBarForm.designer.cs</Link>
+      <DependentUpon>MiniDownloadBarForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\SettingsInterop.cs">
+      <Link>SettingsInterop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\ThreadingInterop.cs">
+      <Link>ThreadingInterop.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\UserMessages.cs">
+      <Link>UserMessages.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\UserMessages.Designer.cs">
+      <Link>UserMessages.Designer.cs</Link>
+      <DependentUpon>UserMessages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\Win32Api.cs">
+      <Link>Win32Api.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\WPFHelper.cs">
+      <Link>WPFHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\ConvertersGeneral.cs">
+      <Link>ConvertersGeneral.cs</Link>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\InputBox.cs">
+      <Link>InputBox.cs</Link>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\InputBox.designer.cs">
+      <Link>InputBox.designer.cs</Link>
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\InputBoxWPF.xaml.cs">
+      <Link>InputBoxWPF.xaml.cs</Link>
+      <DependentUpon>InputBoxWPF.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\SharedClasses\WPFdraggableCanvas.cs">
+      <Link>WPFdraggableCanvas.cs</Link>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CodePreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodePreview.Designer.cs">
+      <DependentUpon>CodePreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="..\..\SharedClasses\MiniDownloadBarForm.resx">
+      <Link>MiniDownloadBarForm.resx</Link>
+      <DependentUpon>MiniDownloadBarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\SharedClasses\UserMessages.resx">
+      <Link>UserMessages.resx</Link>
+      <DependentUpon>UserMessages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\SharedClasses\InputBox.resx">
+      <Link>InputBox.resx</Link>
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <Resource Include="app.ico" />
+    <EmbeddedResource Include="CodePreview.resx">
+      <DependentUpon>CodePreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SciLexer.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SciLexer64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

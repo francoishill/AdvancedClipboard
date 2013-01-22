@@ -1,0 +1,279 @@
+﻿<Window x:Class="AdvancedClipboard.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local='clr-namespace:AdvancedClipboard'
+		xmlns:sharedclasses='clr-namespace:SharedClasses'
+		Name='mainWindow'
+		Title="MainWindow"
+		Height="350"
+		Width="400"
+		Icon='app.ico'
+		Loaded='Window_Loaded'>
+	<Window.Resources>
+		<local:Index1to0Converter x:Key='index1to0Converter' />
+		<sharedclasses:BooleanToOpacityConverter x:Key='booleanToOpacityConverter' />
+		<LinearGradientBrush x:Key='tabcontrol_NonselectedHeaderBrush'
+							 EndPoint='0.5,1'
+							 StartPoint='0.5,0'>
+			<GradientStop Color='#ccc'
+						  Offset='0' />
+			<GradientStop Color='#ddd'
+						  Offset='0.558' />
+			<GradientStop Color='#ccc'
+						  Offset='1' />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key='tabcontrol_SelectedHeaderBrush'
+							 EndPoint='0.5,1'
+							 StartPoint='0.5,0'>
+			<GradientStop Color='#FF397B93'
+						  Offset='0' />
+			<GradientStop Color='#FF42A2C4'
+						  Offset='0.558' />
+			<GradientStop Color='#FF397B93'
+						  Offset='1' />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key='GroupTextItemMainBorderBackgroundBrush'
+							 StartPoint='0 0'
+							 EndPoint='0 1'>
+			<GradientStop Color='#FFE33232'
+						  Offset='0' />
+			<GradientStop Color='#FFE33232'
+						  Offset='0.558' />
+			<GradientStop Color='#FFE33232'
+						  Offset='1' />
+		</LinearGradientBrush>
+		<LinearGradientBrush x:Key='GroupTextItemMainBorderBackgroundBrush_Disabled'
+							 StartPoint='0 0'
+							 EndPoint='0 1'>
+			<GradientStop Color='#55E33232'
+						  Offset='0' />
+			<GradientStop Color='#55E33232'
+						  Offset='0.558' />
+			<GradientStop Color='#55E33232'
+						  Offset='1' />
+		</LinearGradientBrush>
+		<!--<Style TargetType="{x:Type TabItem}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type TabItem}">
+							<Border Name="Border"
+									Margin="0,0,-4,0"
+									BorderBrush="#888888"
+									BorderThickness="1,1,1,1"
+									CornerRadius="2,12,0,0"
+									Background='{StaticResource tabcontrol_NonselectedHeaderBrush}'>
+								<ContentPresenter x:Name="ContentSite"
+												  VerticalAlignment="Center"
+												  HorizontalAlignment="Center"
+												  ContentSource="Header"
+												  Margin="12,2,12,2"
+												  RecognizesAccessKey="True" />
+							</Border>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsMouseOver"
+									 Value="True">
+								<Setter Property="Panel.ZIndex"
+										Value="200" />
+								<Setter TargetName="Border"
+										Property="Background"
+										Value="#ddd" />
+							</Trigger>
+							<Trigger Property="IsSelected"
+									 Value="True">
+								<Setter Property="Panel.ZIndex"
+										Value="100" />
+								<Setter TargetName="Border"
+										Property="Background"
+										Value="{StaticResource tabcontrol_SelectedHeaderBrush}" />
+								<Setter TargetName="Border"
+										Property="BorderThickness"
+										Value="1,1,1,0" />
+								<Setter TargetName="Border"
+										Property="BorderBrush"
+										Value="Transparent" />
+							</Trigger>
+							<Trigger Property="IsEnabled"
+									 Value="False">
+								<Setter TargetName="Border"
+										Property="Background"
+										Value="#EEEEEE" />
+								<Setter TargetName="Border"
+										Property="BorderBrush"
+										Value="#AAAAAA" />
+								<Setter Property="Foreground"
+										Value="#888888" />
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>-->
+	</Window.Resources>
+	<Grid Margin='5'>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width='0' />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height='40' />
+			<RowDefinition />
+			<RowDefinition Height='40' />
+		</Grid.RowDefinitions>
+		<Border Grid.Column='0'
+				Grid.ColumnSpan='2'
+				Grid.Row='0'
+				BorderThickness='1'
+				BorderBrush='#777'
+				CornerRadius='5'
+				VerticalAlignment='Top'
+				Padding='5'>
+			<StackPanel Orientation='Horizontal'>
+				<CheckBox IsChecked='{Binding Topmost, ElementName=mainWindow}'
+						  Content='Keep on top'
+						  Margin='0'
+						  Foreground='CadetBlue'
+						  VerticalAlignment='Top' 
+						  Checked='checkboxKeepOnTop_Checked'
+						  Unchecked='checkboxKeepOnTop_Unchecked'/> 
+				<CheckBox IsChecked='{Binding ShowInTaskbar, ElementName=mainWindow}'
+						  Content='Show Taskbar icon'
+						  Margin='10 0 0 0'
+						  Foreground='CadetBlue'
+						  VerticalAlignment='Top'
+						  Checked='checkboxShowTaskbarIcon_Checked'
+						  Unchecked='checkboxShowTaskbarIcon_Unchecked' />
+			</StackPanel>
+		</Border>
+		<ListBox Grid.Column='0'
+				 Grid.Row='1'
+				 Name='treeviewSnippets'
+				 Visibility='Collapsed'
+				 PreviewMouseDown='treeviewSnippets_PreviewMouseDown'>
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Border MouseEnter='borderSnippetItem_MouseEnter'
+							MouseLeave='borderSnippetItem_MouseLeave'>
+						<Border.ContextMenu>
+							<ContextMenu ContextMenuOpening='ContextMenu_ContextMenuOpening'
+										 ContextMenuClosing='ContextMenu_ContextMenuClosing'>
+								<MenuItem Header='Edit code'
+										  Click='menuitemSnippetEditCode_Click' />
+							</ContextMenu>
+						</Border.ContextMenu>
+						<DockPanel LastChildFill='True'>
+							<Border BorderThickness='1'
+									BorderBrush='#777'
+									Padding='3'
+									CornerRadius='3'
+									Background='#222'>
+								<TextBlock DockPanel.Dock='Left'
+										   Text='{Binding ApplicationType}'
+										   Foreground='#eee'
+										   FontSize='10'
+										   VerticalAlignment='Center' />
+							</Border>
+							<TextBlock Text='{Binding DisplayName}'
+									   Margin='5 0 0 0'
+									   FontSize='16' />
+						</DockPanel>
+					</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<TabControl Grid.Column='1'
+					Grid.Row='1'
+					Name='tabcontrolTextGroups'
+					TabStripPlacement='Left'>
+			<TabControl.ItemTemplate>
+			<!--This is for the TabItem Header actually, the ContentTemplate is below-->
+			<DataTemplate>
+					<Border>
+						<Border.ContextMenu>
+							<ContextMenu>
+								<MenuItem Header='{Binding GroupName}'
+										  HeaderStringFormat='Remove ({0})'
+										  Click='menuitemRemoveGroupItem_Click' />
+								<Separator />
+								<MenuItem Header='_Add new Group'
+										  Click='menuitemAddNewGroup_Click' />
+							</ContextMenu>
+						</Border.ContextMenu>
+						<TextBlock Padding='0'
+								   Text='{Binding}' />
+					</Border>
+				</DataTemplate>
+			</TabControl.ItemTemplate>
+			<TabControl.ContentTemplate>
+				<DataTemplate>
+					<ListBox Name='listboxGroupItemTextList'
+							 ItemsSource='{Binding GroupTextList}'
+							 AlternationCount='{Binding Path=GroupTextList.Count}'
+							 SelectionChanged='listboxGroupItemTextList_SelectionChanged'>
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<Border x:Name='mainItemBorder'
+										BorderBrush='#444'
+										BorderThickness='1'
+										Background='{StaticResource GroupTextItemMainBorderBackgroundBrush}'
+										CornerRadius='5'
+										Margin='0 0 0 3'
+										Padding='5'>
+									<DockPanel LastChildFill='True'>
+										<Border DockPanel.Dock='Left'
+												Background='#222'
+												Padding='3'
+												Margin='0 4 0 0'
+												CornerRadius='2'
+												VerticalAlignment='Center'>
+											<TextBlock Padding='0'
+													   VerticalAlignment='Center'
+													   Foreground='#eee'
+													   Text='{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplatedParent.(ItemsControl.AlternationIndex), Converter={StaticResource index1to0Converter}}'
+													   FontSize='10' />
+										</Border>
+										<TextBlock Text='{Binding}'
+												   ToolTip='{Binding}'
+												   Foreground='White'
+												   FontSize='16'
+												   Padding='5 0 0 0'
+												   VerticalAlignment='Top' />
+									</DockPanel>
+								</Border>
+								<DataTemplate.Triggers>
+									<Trigger Property="IsEnabled"
+											 Value="false">
+										<Setter TargetName='mainItemBorder'
+												Property="Background"
+												Value="{StaticResource GroupTextItemMainBorderBackgroundBrush_Disabled}" />
+									</Trigger>
+								</DataTemplate.Triggers>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</DataTemplate>
+			</TabControl.ContentTemplate>
+		</TabControl>
+		<StatusBar Grid.ColumnSpan='2'
+				   Grid.Row='2'
+				   Height='30'
+				   VerticalAlignment='Bottom'
+				   Background='#f7f7f7'
+				   BorderThickness='1'
+				   BorderBrush='#777'>
+			<StatusBarItem Name='statusbarItemStatus' />
+			<StatusBarItem HorizontalAlignment='Right'
+						   FontSize='9'
+						   Background='#333'
+						   Padding='3 0'>
+				<StatusBarItem.Content>
+					<TextBlock Text='Quick Info (hover mouse)'
+							   Name='statusbaritemTextblockQuickInfoHoverForTooltip'
+							   Padding='0'
+							   Foreground='White'
+							   Width='60'
+							   TextWrapping='Wrap' />
+				</StatusBarItem.Content>
+			</StatusBarItem>
+		</StatusBar>
+	</Grid>
+</Window>
