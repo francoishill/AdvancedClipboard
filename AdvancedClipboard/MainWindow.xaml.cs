@@ -820,6 +820,20 @@ namespace AdvancedClipboard
 				listOfTextGroups.Add(tg);
 		}
 
+		private void menuitemAbout_Click(object sender, RoutedEventArgs e)
+		{
+			AboutWindow2.ShowAboutWindow(new System.Collections.ObjectModel.ObservableCollection<DisplayItem>()
+			{
+				new DisplayItem("Author", "Francois Hill"),
+				new DisplayItem("Icon(s) obtained from", null)
+			});
+		}
+
+		private void menuitemExit_Click(object sender, RoutedEventArgs e)
+		{
+			this.Close();
+		}
+
 		/*private System.Windows.Controls.TreeView GetTabTreeview(TabItem tab)
 		{
 			if (tab == null)
